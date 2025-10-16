@@ -1,8 +1,5 @@
 USE movilidadurbana;
 
--- =====================================================
--- tipospago — 30 registros (ASCII)
--- =====================================================
 INSERT INTO tipospago (id, nombre, descripcion) VALUES
 (1,  'Efectivo',               'Pago en efectivo al finalizar el viaje.'),
 (2,  'Tarjeta de Credito',     'Pago con tarjeta de credito a traves de la app.'),
@@ -35,9 +32,6 @@ INSERT INTO tipospago (id, nombre, descripcion) VALUES
 (29, 'Gift Card',              'Tarjeta de regalo.'),
 (30, 'Promocion Bancaria',     'Promo bancos/financieras.');
 
--- =====================================================
--- motivocancelacion — 30 registros (ASCII)
--- =====================================================
 INSERT INTO motivocancelacion (id, codigo, descripcion) VALUES
 (1,  'PASSENGER_NO_SHOW',  'El pasajero no se presento en el punto de encuentro.'),
 (2,  'DRIVER_TOO_LATE',    'El conductor demoro mas de lo esperado.'),
@@ -70,9 +64,6 @@ INSERT INTO motivocancelacion (id, codigo, descripcion) VALUES
 (29, 'SCHEDULE_CHANGE',    'Cambio de horario.'),
 (30, 'OTHER',              'Otro motivo.');
 
--- =====================================================
--- usuariosviajeros — 30 registros (ASCII)
--- =====================================================
 INSERT INTO usuariosviajeros (id, nombre, apellido, correo, telefono) VALUES
 (1,  'Tito',  'Calderon',      'tito.calde@casilla.ar',          '+54 9 3764 11-0001'),
 (2,  'Cosme', 'Fulanito',      'cosme.f@correo.local',           '3764-22-0002'),
@@ -105,9 +96,6 @@ INSERT INTO usuariosviajeros (id, nombre, apellido, correo, telefono) VALUES
 (29, 'Lisel', 'Kovalenko',     'lis.kova@posteo.eu',             '3764-303-0029'),
 (30, 'Gael',  'Yofre',         'gael.yofre@cuenta.nz',           '3764-313-0030');
 
--- =====================================================
--- conductoresactivos — 30 registros (ASCII) con ST_SRID(POINT, 4326)
--- =====================================================
 INSERT INTO conductoresactivos (id, nombre, apellido, correo, telefono, licencia, estado, ubicacion) VALUES
 (1,  'Ramiro',   'Achaval',        'ramiro.ach@chof.ar',        '+54 9 3764 11-4001', 'MIS-0001-AR', 'conectado',   ST_SRID(POINT(-55.8969, -27.3680), 4326)),
 (2,  'Milagros', 'Bidegain',       'mili.bid@chof.ar',          '3764-22-4002',       'MIS-0002-AR', 'desconectado',ST_SRID(POINT(-55.9000, -27.3700), 4326)),
@@ -140,9 +128,6 @@ INSERT INTO conductoresactivos (id, nombre, apellido, correo, telefono, licencia
 (29, 'Nazareno', 'Cuneo Libarona', 'naza.cl@chof.ar',           '3765-29-4029',       'MIS-0029-AR', 'desconectado',ST_SRID(POINT(-55.8992, -27.3662), 4326)),
 (30, 'Mirko',    'Dahbar',         'mirko.d@chof.ar',           '3765-30-4030',       'MIS-0030-AR', 'conectado',   ST_SRID(POINT(-55.8932, -27.3712), 4326));
 
--- =====================================================
--- flotavehiculos — 30 registros (ASCII)
--- =====================================================
 INSERT INTO flotavehiculos (id, idconductor, marca, modelo, patente, tiposervicio, companiaSeguro, polizaSeguro, seguroValidoHasta) VALUES
 (1,  1,  'Fiat',       'Cronos',          'AE 123 AA', 'estándar', 'Seguros Rivadavia',     'POL1001', '2026-05-20'),
 (2,  2,  'Volkswagen', 'Gol',             'AD 456 BB', 'estándar', 'La Caja',               'POL1002', '2026-06-15'),
@@ -175,11 +160,6 @@ INSERT INTO flotavehiculos (id, idconductor, marca, modelo, patente, tiposervici
 (29, 29, 'Honda',      'HR-V',            'AB 817 AD', 'xl',       'Federacion Patronal',   'POL1029', '2028-09-10'),
 (30, 30, 'Citroen',    'C5 Aircross',     'AA 918 AE', 'xl',       'Mapfre',                'POL1030', '2028-10-05');
 
--- =====================================================
--- solicitudesviaje — 30 registros (ASCII; tiempos/estados)
--- =====================================================
-
--- Completados (1..20)
 INSERT INTO solicitudesviaje (idpasajero, idconductor, idvehiculo, estado, solicitadoen, asignadoen, iniciadoen, finalizadoen, direccionorigen, direcciondestino, duracionrealseg, distanciakm, montotarifa) VALUES
 (1,  1,  1,  'completado','2025-10-01 08:00:00','2025-10-01 08:01:00','2025-10-01 08:05:00','2025-10-01 08:20:00','Av. Corrientes 123','Av. Santa Fe 456',900, 5.2,1850.50),
 (2,  3,  3,  'completado','2025-10-01 09:15:00','2025-10-01 09:16:00','2025-10-01 09:20:00','2025-10-01 09:45:00','Calle Falsa 123','Av. Siempreviva 742',1500,8.1,2400.00),
@@ -202,7 +182,6 @@ INSERT INTO solicitudesviaje (idpasajero, idconductor, idvehiculo, estado, solic
 (24, 2,  2,  'completado','2025-10-09 12:00:00','2025-10-09 12:02:00','2025-10-09 12:06:00','2025-10-09 12:20:00','Rotonda de Posadas','Playa El Brete',840,5.0,1800.00),
 (29, 6,  6,  'completado','2025-10-09 14:00:00','2025-10-09 14:01:00','2025-10-09 14:05:00','2025-10-09 14:30:00','Barrio A-4','Centro del Conocimiento',1500,9.8,2900.50);
 
--- Cancelados (21..25)
 INSERT INTO solicitudesviaje (idpasajero, idconductor, idvehiculo, estado, solicitadoen, asignadoen, canceladoen, canceladopor, idmotivocancelacion, direccionorigen, direcciondestino) VALUES
 (4,  9,  9, 'cancelado','2025-10-01 11:00:00','2025-10-01 11:02:00','2025-10-01 11:05:00','pasajero',2,'Av. Rademacher 5000','Centro'),
 (6,  12, 12,'cancelado','2025-10-02 16:00:00','2025-10-02 16:03:00','2025-10-02 16:10:00','conductor',1,'Calle 147 y 170','Itaembe Mini'),
@@ -210,20 +189,15 @@ INSERT INTO solicitudesviaje (idpasajero, idconductor, idvehiculo, estado, solic
 (19, 19, 19,'cancelado','2025-10-05 18:00:00','2025-10-05 18:02:00','2025-10-05 18:03:00','sistema',  4,'Av. Jauretche y Lavalle','Hospital'),
 (28, 29, 29,'cancelado','2025-10-08 14:00:00','2025-10-08 14:02:00','2025-10-08 14:06:00','pasajero',5,'Barrio Itaembe Guazu','Costanera');
 
--- En curso / asignados / solicitados (26..30)
 INSERT INTO solicitudesviaje (idpasajero, idconductor, idvehiculo, estado, solicitadoen, asignadoen, iniciadoen, direccionorigen, direcciondestino) VALUES
 (14, 1, 1, 'iniciado',  '2025-10-09 16:00:00','2025-10-09 16:01:00','2025-10-09 16:05:00','Av. Corrientes 123','Av. Santa Fe 456'),
 (17, 3, 3, 'iniciado',  '2025-10-09 16:10:00','2025-10-09 16:11:00','2025-10-09 16:14:00','Calle Falsa 123','Av. Siempreviva 742'),
 (22, 8, 8, 'asignado',  '2025-10-09 16:15:00','2025-10-09 16:16:00',NULL,'Plaza San Martin','Terminal de Omnibus'),
 (27, 4, 4, 'asignado',  '2025-10-09 16:20:00','2025-10-09 16:22:00',NULL,'Hospital Madariaga','Costanera de Posadas');
 
--- Solicitado sin chofer/vehiculo
 INSERT INTO solicitudesviaje (idpasajero, idconductor, idvehiculo, estado, solicitadoen, direccionorigen, direcciondestino)
 VALUES (9, NULL, NULL, 'solicitado','2025-10-09 16:25:00','Aeropuerto de Posadas','Hotel Savoy');
 
--- =====================================================
--- paradasintermedias — 30 registros (ASCII)
--- =====================================================
 INSERT INTO paradasintermedias (idviaje, secuencia, direccionparada, latparada, lngparada) VALUES
 (1, 1, 'Kiosco 24hs', -27.3688, -55.8931),
 (1, 2, 'Farmacia Mitre', -27.3690, -55.8940),
@@ -256,9 +230,6 @@ INSERT INTO paradasintermedias (idviaje, secuencia, direccionparada, latparada, 
 (27,1, 'Gomeria El Pato', -27.3969, -55.9210),
 (28,1, 'Heladeria Grido', -27.3979, -55.9220);
 
--- =====================================================
--- registropagos — 30 registros (ASCII)
--- =====================================================
 INSERT INTO registropagos (idviaje, idmetodo, monto, estado, pagadoen, referenciatransaccion) VALUES
 (1,  2, 1850.50, 'pagado',    '2025-10-01 08:20:05','TX-0001'),
 (2,  3, 2400.00, 'pagado',    '2025-10-01 09:45:10','TX-0002'),
@@ -281,7 +252,6 @@ INSERT INTO registropagos (idviaje, idmetodo, monto, estado, pagadoen, referenci
 (19, 2, 1800.00, 'pagado',    '2025-10-09 12:20:05','TX-0019'),
 (20, 3, 2900.50, 'pagado',    '2025-10-09 14:30:10','TX-0020');
 
--- Reembolsos (pagadoen NULL)
 INSERT INTO registropagos (idviaje, idmetodo, monto, estado, pagadoen, referenciatransaccion) VALUES
 (21, 1, 0.00, 'reembolsado', NULL, 'TX-0021'),
 (22, 2, 0.00, 'reembolsado', NULL, 'TX-0022'),
@@ -289,7 +259,6 @@ INSERT INTO registropagos (idviaje, idmetodo, monto, estado, pagadoen, referenci
 (24, 1, 0.00, 'reembolsado', NULL, 'TX-0024'),
 (25, 2, 0.00, 'reembolsado', NULL, 'TX-0025');
 
--- Pendientes
 INSERT INTO registropagos (idviaje, idmetodo, monto, estado, pagadoen, referenciatransaccion) VALUES
 (26, 2, 0.00, 'pendiente', NULL, NULL),
 (27, 3, 0.00, 'pendiente', NULL, NULL),
@@ -297,9 +266,6 @@ INSERT INTO registropagos (idviaje, idmetodo, monto, estado, pagadoen, referenci
 (29, 2, 0.00, 'pendiente', NULL, NULL),
 (30, 3, 0.00, 'pendiente', NULL, NULL);
 
--- =====================================================
--- opinionesconductores — 30 registros (ASCII, variados)
--- =====================================================
 INSERT INTO opinionesconductores (idviaje, idconductor, idpasajero, calificacion, comentario) VALUES
 (1,  1,  1, 5, 'Arranco con mate listo y Waze afinado: un lujo.'),
 (2,  3,  2, 4, 'Buen ritmo, playlist indie patagonica a volumen humano.'),
@@ -332,9 +298,6 @@ INSERT INTO opinionesconductores (idviaje, idconductor, idpasajero, calificacion
 (29, 6,  29, 5, 'Cierre redondo, cero desvios.'),
 (30, 28, 30, 5, 'Remate 10/10: puerta a puerta real.');
 
--- =====================================================
--- opinionesviajeros — 30 registros (ASCII, variados)
--- =====================================================
 INSERT INTO opinionesviajeros (idviaje, idpasajero, idconductor, calificacion, comentario) VALUES
 (1,  1,  1, 5, 'Subio con vuelto justo y destino claro.'),
 (2,  2,  3, 5, 'Saludo cordial, cinturon puesto sin decir nada.'),

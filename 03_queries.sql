@@ -143,13 +143,6 @@ LEFT JOIN solicitudesviaje s
 WHERE c.estado = 'conectado'
   AND s.id IS NULL;
 
-SELECT id, nombre, apellido
-FROM conductoresactivos
-WHERE ST_Within(
-  ubicacion,
-  ST_GeomFromText('POLYGON((-55.905 -27.368,-55.895 -27.368,-55.895 -27.362,-55.905 -27.362,-55.905 -27.368))',4326)
-);
-
 
 -- Ejemplo de uso de la vista (extrae coordenadas)
 SELECT

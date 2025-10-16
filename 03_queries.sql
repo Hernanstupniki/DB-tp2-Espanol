@@ -152,3 +152,10 @@ SELECT
   ST_X(ubicacion) AS longitud,
   ST_Y(ubicacion) AS latitud
 FROM vconductoresdisponibles;
+
+SELECT id, nombre, apellido
+FROM conductoresactivos
+WHERE ST_Within(
+  ubicacion,
+  ST_GeomFromText('POLYGON((-55.905 -27.368,-55.895 -27.368,-55.895 -27.362,-55.905 -27.362,-55.905 -27.368))',4326)
+);

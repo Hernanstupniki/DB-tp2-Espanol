@@ -132,6 +132,7 @@ WHERE ST_Within(
   ST_GeomFromText('POLYGON((-55.905 -27.368,-55.895 -27.368,-55.895 -27.362,-55.905 -27.362,-55.905 -27.368))',4326)
 );
 
+-- Vista
 SELECT
   id,
   nombre,

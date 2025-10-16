@@ -1,17 +1,7 @@
--- 01_schema.sql — Sistema de Movilidad Urbana
--- Versión final en español, sin guiones bajos ni nombres genéricos
--- Adaptado con nombres únicos y coherentes entre tablas
-
--- =============================================================================
--- Inicialización de la base de datos
--- =============================================================================
 DROP DATABASE IF EXISTS movilidadurbana;
 CREATE DATABASE movilidadurbana;
 USE movilidadurbana;
 
--- =============================================================================
--- Tablas de referencia
--- =============================================================================
 CREATE TABLE tipospago (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nombre VARCHAR(40) NOT NULL UNIQUE,
@@ -28,9 +18,6 @@ CREATE TABLE motivocancelacion (
   eliminadoen DATETIME NULL
 );
 
--- =============================================================================
--- Entidades principales
--- =============================================================================
 CREATE TABLE usuariosviajeros (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nombre VARCHAR(60) NOT NULL,
@@ -74,9 +61,6 @@ CREATE TABLE flotavehiculos (
   CONSTRAINT ckvehiculosegurofecha CHECK (seguroValidoHasta >= DATE(creadoen))
 );
 
--- =============================================================================
--- Solicitudes y viajes
--- =============================================================================
 CREATE TABLE solicitudesviaje (
   id INT AUTO_INCREMENT PRIMARY KEY,
   idpasajero INT NOT NULL,
@@ -101,7 +85,6 @@ CREATE TABLE solicitudesviaje (
   idmotivocancelacion INT NULL,
   creadoen DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   eliminadoen DATETIME NULL,
-
   CONSTRAINT fkviajespasajero
     FOREIGN KEY (idpasajero) REFERENCES usuariosviajeros(id)
     ON UPDATE CASCADE ON DELETE RESTRICT,
@@ -114,7 +97,6 @@ CREATE TABLE solicitudesviaje (
   CONSTRAINT fkviajesmotivocancelacion
     FOREIGN KEY (idmotivocancelacion) REFERENCES motivocancelacion(id)
     ON UPDATE CASCADE ON DELETE RESTRICT,
-
   CONSTRAINT ckviajescoordenadas CHECK (
     (latorigen BETWEEN -90 AND 90 OR latorigen IS NULL) AND
     (lngorigen BETWEEN -180 AND 180 OR lngorigen IS NULL) AND
@@ -146,9 +128,6 @@ CREATE INDEX ixviajesestadotiempo ON solicitudesviaje (estado, solicitadoen);
 CREATE INDEX ixviajesconductorestadotiempo ON solicitudesviaje (idconductor, estado, solicitadoen);
 CREATE INDEX ixviajespasajerotiempo ON solicitudesviaje (idpasajero, solicitadoen);
 
--- =============================================================================
--- Paradas intermedias
--- =============================================================================
 CREATE TABLE paradasintermedias (
   id INT AUTO_INCREMENT PRIMARY KEY,
   idviaje INT NOT NULL,
@@ -168,9 +147,6 @@ CREATE TABLE paradasintermedias (
   )
 );
 
--- =============================================================================
--- Opiniones y calificaciones
--- =============================================================================
 CREATE TABLE opinionesconductores (
   id INT AUTO_INCREMENT PRIMARY KEY,
   idviaje INT NOT NULL,
@@ -221,9 +197,6 @@ CREATE INDEX ixresenaspasajerofecha ON opinionesviajeros (idpasajero, creadoen);
 CREATE FULLTEXT INDEX ftresenasconductorcomentario ON opinionesconductores(comentario);
 CREATE FULLTEXT INDEX ftresenaspasajerocomentario ON opinionesviajeros(comentario);
 
--- =============================================================================
--- Pagos y finanzas
--- =============================================================================
 CREATE TABLE registropagos (
   id INT AUTO_INCREMENT PRIMARY KEY,
   idviaje INT NOT NULL,
@@ -252,8 +225,5 @@ CREATE INDEX ixpagosestado ON registropagos (estado);
 CREATE INDEX ixpagospagadoen ON registropagos (pagadoen);
 CREATE INDEX ixpagosmetodotiempo ON registropagos (idmetodo, pagadoen);
 
--- =============================================================================
--- Índices de búsqueda por nombre
--- =============================================================================
 CREATE INDEX ixpasajerosapellidonombre ON usuariosviajeros (apellido, nombre);
 CREATE INDEX ixconductoresapellidonombre ON conductoresactivos (apellido, nombre);
